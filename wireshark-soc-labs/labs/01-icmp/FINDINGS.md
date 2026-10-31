@@ -20,6 +20,12 @@ Analysis of `pcap/icmp_soc_lab.pcap` (417 packets, 71 IPv4 conversations, synthe
 - **ATT&CK:** T1018 Remote System Discovery
 - **Action:** identify 10.0.0.99 and confirm it is not an approved scanner. Look for follow-up port scans against the 3 live hosts. Alert on one source pinging more than 20 hosts in 10 seconds.
 
+ ![icmp flood statistics](wireshark-soc-labs/labs/01-icmp/screenshots/02-sweep-conversations.png)
+
+![icmp sweep frames](wireshark-soc-labs/labs/01-icmp/screenshots/03-sweep-frames-86-89.png)
+
+ 
+
 ## 2. ICMP tunnel (frames 90-113): Suspicious
 
 - **Hosts:** 10.0.0.77 and 203.0.113.50
