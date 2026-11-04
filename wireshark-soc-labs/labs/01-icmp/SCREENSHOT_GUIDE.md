@@ -100,22 +100,4 @@ Expected totals: 386 echo requests, 21 echo replies, 5 time-exceeded, 1 type 3 c
 - Second screenshot: the Ethernet and IP source (10.0.0.66, MAC aa:bb:cc:00:00:66), next to the real gateway (10.0.0.1, MAC aa:bb:cc:00:00:01).
 - Annotate: sender is not the default gateway and names itself as the better next hop.
 
-## 4. Summary view
 
-Add the filter below to see all suspicious types and errors at once, and take one final screenshot:
-
-```
-icmp.type == 5 || icmp.type == 3 || icmp.type == 11 || (icmp.type == 8 && data.len > 100) || ip.flags.mf == 1 || ip.frag_offset > 0
-```
-
-Also take one from Analyze > Expert Information to show what Wireshark flags on its own.
-
-## Screenshot tips
-
-- Crop to the relevant area and annotate with arrows or boxes. Blur nothing, because all addresses are lab values.
-- Name files in order: `01-overview.png`, `02-ping.png`, `03-traceroute.png` and so on.
-- Add one or two sentences under each screenshot in the README: what you filtered, what you saw, why it is normal or suspicious.
-
-## Note on regenerating the pcap
-
-Tunnel payloads use random bytes, so a regenerated file has the same structure but different payload content from the shipped file.
