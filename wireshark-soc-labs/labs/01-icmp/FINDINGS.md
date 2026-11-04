@@ -72,17 +72,10 @@ Analysis of `pcap/icmp_soc_lab.pcap` (417 packets, 71 IPv4 conversations, synthe
 - **Meaning:** fragmentation is not malicious by itself, but fragmented ICMP echo from an external host to an internal server is unusual. It can be used to evade inspection that doesn't reassemble. This case is a lead worth escalating, not proof of an attack.
 - **Action:** drop fragmented ICMP at the perimeter, make sure firewalls and IDS reassemble before inspecting, and watch for repeats from the same source.
 
-## 5. ICMP redirect (frame 417): Suspicious
 
-- **Sender and target:** 10.0.0.66 to 10.0.0.15
-- **Evidence:** type 5, code 1 (redirect for the host), gateway address 10.0.0.66, quoting a packet from 10.0.0.15 to 8.8.8.8.
-  - The real gateway is 10.0.0.1: it is the first traceroute hop, and traffic to external addresses is sent to its MAC (aa:bb:cc:00:00:01).
-  - The redirect comes from a different host and MAC (aa:bb:cc:00:00:66) and names its own sender as the next hop, which a legitimate redirect never does.
-  - The quoted packet (identifier 0xBBBB) does not appear earlier in the capture.
-- **Screenshot:** *pending*
-- **Meaning:** probable attempt to hijack routing for a man-in-the-middle position. Intent and success can't be confirmed from one packet.
-- **ATT&CK:** T1557 Adversary-in-the-Middle
-- **Action:** investigate 10.0.0.66, check 10.0.0.15's routing table for a new route to 8.8.8.8, disable redirect acceptance on hosts, and alert on type 5 from any source other than the gateway.
+ ![icmp fragmentation](screenshots/08-fragmentation.png)
+
+
 
 ## Summary of recommendations
 
